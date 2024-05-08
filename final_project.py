@@ -1,5 +1,6 @@
 import argparse
 import yaml
+import xmltodict
 import os
 import sys
 
@@ -19,6 +20,8 @@ def main():
         obj = loading_json(input_file)
     if os.path.splitext(input_file)[1] == ".yml" or os.path.splitext(input_file)[1] == ".yaml":
         obj = loading_yml_or_yaml(input_file)
+    if os.path.splitext(input_file)[1] == ".xml":
+        obj = loading_xml(input_file)
         
 def loading_json(input_file):
     for file in files:
@@ -44,6 +47,20 @@ def loading_yml_or_yaml(input_file):
                     return yaml_obj
                 except:
                     print("yaml or yml is not written correctly ")
+    print("No such file")
+    sys.exit(1)
+
+def loading_xml(input_file):
+    for file in files:
+        if file == input_file:
+            with open(file, "r") as file_xml:
+                file_content = file_xml.read()
+                try:
+                    xml_obj = xmltodict.parse(file_content)
+                    return xml_obj
+                except:
+                    print("xml is not written correctly ")
+                    sys.exit(1)
     print("No such file")
     sys.exit(1)
      
