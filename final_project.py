@@ -22,6 +22,8 @@ def main():
         obj = loading_yml_or_yaml(input_file)
     if os.path.splitext(input_file)[1] == ".xml":
         obj = loading_xml(input_file)
+    if os.path.splitext(output_file)[1] == ".json":
+        create_json_file(obj, output_file)
         
 def loading_json(input_file):
     for file in files:
@@ -63,6 +65,12 @@ def loading_xml(input_file):
                     sys.exit(1)
     print("No such file")
     sys.exit(1)
+
+def create_json_file(obj, output_file):
+    json_data = json.dumps(obj)
+    with open(f"{os.path.splitext(output_file)[0]}.json", "w") as json_file:
+        json_file.write(json_data)
+
      
 
 if __name__ == "__main__":
