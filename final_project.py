@@ -26,6 +26,9 @@ def main():
         create_json_file(obj, output_file)
     if os.path.splitext(output_file)[1] == ".yaml" or os.path.splitext(output_file)[1] == ".yml":
         create_yml_or_yaml_file(obj, output_file)
+    if os.path.splitext(output_file)[1] == ".xml":
+        create_xml_file(obj, output_file)
+
         
 def loading_json(input_file):
     for file in files:
@@ -77,6 +80,12 @@ def create_yml_or_yaml_file(obj, output_file):
     yaml_data = yaml.dump(obj)
     with open(f"{os.path.splitext(output_file)[0]}{os.path.splitext(output_file)[1]}", "w") as yaml_file:
         yaml_file.write(yaml_data)
+
+def create_xml_file(obj, output_file):
+    xml_data = {'root': obj}
+    xml_data = xmltodict.unparse(xml_data)
+    with open(f"{os.path.splitext(output_file)[0]}.xml", "w") as xml_file:
+        xml_file.write(xml_data)
 
 if __name__ == "__main__":
     main()
