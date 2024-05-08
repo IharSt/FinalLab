@@ -29,7 +29,8 @@ def main():
     if os.path.splitext(output_file)[1] == ".xml":
         create_xml_file(obj, output_file)
 
-        
+
+# loading into an object from a .json file and verifying that the syntax of the file is correct
 def loading_json(input_file):
     for file in files:
         if file == input_file:
@@ -44,6 +45,7 @@ def loading_json(input_file):
     print("No such file")
     sys.exit(1)
 
+# loading into an object from an .yml file and verifying that the syntax of the file is correct
 def loading_yml_or_yaml(input_file):
     for file in files:
         if file == input_file:
@@ -57,6 +59,7 @@ def loading_yml_or_yaml(input_file):
     print("No such file")
     sys.exit(1)
 
+# loading into an object from an .xml file and verifying that the syntax of the file is correct
 def loading_xml(input_file):
     for file in files:
         if file == input_file:
@@ -71,16 +74,19 @@ def loading_xml(input_file):
     print("No such file")
     sys.exit(1)
 
+# writing data from the object to a file in the format and according to the syntax of .json
 def create_json_file(obj, output_file):
     json_data = json.dumps(obj)
     with open(f"{os.path.splitext(output_file)[0]}.json", "w") as json_file:
         json_file.write(json_data)
 
+# writing data from an object to a file in the format and according to the syntax of .yml
 def create_yml_or_yaml_file(obj, output_file):
     yaml_data = yaml.dump(obj)
     with open(f"{os.path.splitext(output_file)[0]}{os.path.splitext(output_file)[1]}", "w") as yaml_file:
         yaml_file.write(yaml_data)
 
+#writing data from the object to a file in the format and according to the syntax .xml
 def create_xml_file(obj, output_file):
     xml_data = {'root': obj}
     xml_data = xmltodict.unparse(xml_data)
