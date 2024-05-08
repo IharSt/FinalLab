@@ -1,5 +1,7 @@
 import argparse
+import yaml
 import os
+import sys
 
 files = os.listdir()
 
@@ -15,6 +17,8 @@ def main():
     output_file = args.output_file
     if os.path.splitext(input_file)[1] == ".json":
         obj = loading_json(input_file)
+    if os.path.splitext(input_file)[1] == ".yml" or os.path.splitext(input_file)[1] == ".yaml":
+        obj = loading_yml_or_yaml(input_file)
         
 def loading_json(input_file):
     for file in files:
@@ -27,6 +31,19 @@ def loading_json(input_file):
                 except:
                     print("json is not written correctly ")
                     sys.exit(1)
+    print("No such file")
+    sys.exit(1)
+
+def loading_yml_or_yaml(input_file):
+    for file in files:
+        if file == input_file:
+            with open(file, "r") as file_yaml:
+                file_content = file_yaml.read()
+                try:
+                    yaml_obj = yaml.safe_load(file_content)
+                    return yaml_obj
+                except:
+                    print("yaml or yml is not written correctly ")
     print("No such file")
     sys.exit(1)
      
