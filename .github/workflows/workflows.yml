@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        ./installlResources.sh
+        pip install pyinstaller argparse pyyaml xmltodict 
 
     - name: Build project
       run: pyinstaller --onefile final_project.py
