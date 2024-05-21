@@ -28,7 +28,7 @@ jobs:
         ./installlResources.sh
 
     - name: Build project
-      run: pyinstaller --onefile project.py
+      run: pyinstaller --onefile final_project.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
